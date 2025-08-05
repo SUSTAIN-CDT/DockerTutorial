@@ -34,21 +34,6 @@ sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-#### CentOS/RHEL/Fedora
-```bash
-# Install Docker using dnf (Fedora) or yum (CentOS/RHEL)
-sudo dnf install docker  # For Fedora
-# or
-sudo yum install docker  # For CentOS/RHEL
-
-# Start and enable Docker service
-sudo systemctl start docker
-sudo systemctl enable docker
-
-# Add your user to the docker group
-sudo usermod -aG docker $USER
-```
-
 ### Windows Installation
 
 1. **Download Docker Desktop for Windows** from the official Docker website: https://www.docker.com/products/docker-desktop
@@ -58,16 +43,6 @@ sudo usermod -aG docker $USER
 5. **Launch Docker Desktop** from the Start menu
 6. **Verify installation** by opening PowerShell or Command Prompt and running:
    ```cmd
-   docker --version
-   ```
-
-### macOS Installation
-
-1. **Download Docker Desktop for Mac** from: https://www.docker.com/products/docker-desktop
-2. **Open the .dmg file** and drag Docker to your Applications folder
-3. **Launch Docker Desktop** from Applications
-4. **Verify installation** by opening Terminal and running:
-   ```bash
    docker --version
    ```
 
@@ -139,33 +114,7 @@ docker run --gpus all -it -v $(pwd):/workspace pytorch-conda
 
 ## Distributing the Docker Environment
 
-### Method 1: Docker Hub (Recommended)
-
-Docker Hub is the most common way to share Docker images publicly or privately.
-
-#### Push to Docker Hub
-```bash
-# Tag your image with your Docker Hub username
-docker tag pytorch-conda yourusername/pytorch-conda:latest
-
-# Login to Docker Hub
-docker login
-
-# Push the image to Docker Hub
-docker push yourusername/pytorch-conda:latest
-```
-
-#### Pull from Docker Hub
-Others can then pull and use your image:
-```bash
-# Pull the image
-docker pull yourusername/pytorch-conda:latest
-
-# Run the container
-docker run -it yourusername/pytorch-conda:latest
-```
-
-### Method 2: Export/Import Docker Image
+### Method 1: Export/Import Docker Image
 
 For offline distribution or when Docker Hub isn't suitable:
 
@@ -184,7 +133,7 @@ docker load -i pytorch-conda.tar
 docker run -it pytorch-conda:latest
 ```
 
-### Method 3: Share the Dockerfile
+### Method 2: Share the Dockerfile
 
 The simplest method is to share just the Dockerfile:
 
@@ -198,24 +147,6 @@ The simplest method is to share just the Dockerfile:
    docker run -it pytorch-conda
    ```
 
-### Method 4: Private Container Registry
-
-For enterprise environments:
-
-1. **Set up a private registry** (AWS ECR, Azure Container Registry, Google Container Registry, or self-hosted)
-2. **Tag and push** your image to the private registry
-3. **Configure access permissions** for team members
-4. **Pull images** using authenticated access
-
-## Best Practices
-
-- **Use .dockerignore** to exclude unnecessary files from the build context
-- **Keep images small** by using multi-stage builds and removing unnecessary packages
-- **Pin versions** of base images and packages for reproducibility
-- **Use non-root users** for security when possible
-- **Document your Dockerfile** with comments explaining each step
-- **Tag images** with meaningful version numbers
-- **Test images** on different platforms before distributing
 
 ## Verification
 
@@ -226,4 +157,3 @@ To verify that PyTorch is correctly installed in your container:
 docker run -it pytorch-conda python -c "import torch; print(f'PyTorch version: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}')"
 ```
 
-This tutorial provides a complete workflow for creating, building, and distributing Docker containers with Conda and PyTorch environments, ensuring reproducible development environments across different systems and teams.
