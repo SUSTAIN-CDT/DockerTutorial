@@ -4,6 +4,9 @@ Docker is a powerful platform for containerization that allows developers to pac
 
 Docker simplifies deployment, enhances reproducibility, and isolates environments, making it ideal for development, testing, and production. By combining Docker with Conda, a package and environment manager, you can create a reproducible Python environment with specific libraries like PyTorch, which can be shared with others, ensuring they can run the same setup without compatibility issues.
 
+This is meant to be a quick start tutotiral, for further explanations and features see:
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
 ## Docker Installation
 
 ### Linux Installation
@@ -156,4 +159,9 @@ To verify that PyTorch is correctly installed in your container:
 # Run Python in the container and test PyTorch
 docker run -it pytorch-conda python -c "import torch; print(f'PyTorch version: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}')"
 ```
+
+## Further Reading
+
+As mentioned at the start, this is meant to be a quick start tutotiral, for further explanations and features see:
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
